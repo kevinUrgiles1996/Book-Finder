@@ -1,7 +1,14 @@
-import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment, useState, useContext } from 'react';
+import BookContext from '../../context/book/bookContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const SearchBar = ({ searchBooks, clearBooks, showClear, setAlert }) => {
+const SearchBar = () => {
+  const alertContext = useContext(AlertContext);
+  const bookContext = useContext(BookContext);
+
+  const { searchBooks, clearBooks, books } = bookContext;
+  const { setAlert } = alertContext;
+
   const [text, setText] = useState('');
 
   const onChange = e => setText(e.target.value);
@@ -12,7 +19,6 @@ const SearchBar = ({ searchBooks, clearBooks, showClear, setAlert }) => {
       setAlert('Please, enter something');
     } else {
       searchBooks(text);
-      setText('');
     }
   };
   return (
@@ -36,7 +42,7 @@ const SearchBar = ({ searchBooks, clearBooks, showClear, setAlert }) => {
                   Search
                 </button>
               </form>
-              {showClear && (
+              {books.length > 0 && (
                 <button
                   onClick={clearBooks}
                   className='btn btn-light border border-black btn-block my-2'
@@ -50,13 +56,6 @@ const SearchBar = ({ searchBooks, clearBooks, showClear, setAlert }) => {
       </div>
     </Fragment>
   );
-};
-
-SearchBar.propTypes = {
-  searchBooks: PropTypes.func.isRequired,
-  clearBooks: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
-  setAlert: PropTypes.func.isRequired
 };
 
 export default SearchBar;

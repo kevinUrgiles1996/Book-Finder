@@ -1,10 +1,16 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 
-const BookInfo = ({ getBookDetails, loading, bookDetails }) => {
+import BookContext from '../../context/book/bookContext';
+
+const BookInfo = () => {
+  const bookContext = useContext(BookContext);
+
+  const { book, getBook, loading } = bookContext;
+
   const { id } = useParams();
+
   const {
     title,
     authors,
@@ -13,7 +19,7 @@ const BookInfo = ({ getBookDetails, loading, bookDetails }) => {
     publisher,
     publishedDate,
     categories
-  } = bookDetails;
+  } = book;
 
   const noAvailable =
     'https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg';
@@ -22,7 +28,7 @@ const BookInfo = ({ getBookDetails, loading, bookDetails }) => {
     'https://books.google.com.ec/books?id=' + id + '&printsec=frontcover';
 
   useEffect(() => {
-    getBookDetails(id);
+    getBook(id);
     // eslint-disable-next-line
   }, []);
 
@@ -117,12 +123,6 @@ const BookInfo = ({ getBookDetails, loading, bookDetails }) => {
       </div>
     </Fragment>
   );
-};
-
-BookInfo.propTypes = {
-  getBookDetails: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  bookDetails: PropTypes.object.isRequired
 };
 
 export default BookInfo;

@@ -9,7 +9,7 @@ const NotFound = () => {
       </Link>
       <div className='jumbotron my-2 border border-black'>
         <h4 className='display-4'>Page Not Found</h4>
-        <p className='lead'>The page you're looking for does not exist.</p>
+        <p className='lead'>The page you're looking for does not exist...</p>
       </div>
     </Fragment>
   );

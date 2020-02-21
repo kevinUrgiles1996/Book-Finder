@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import BookItem from './BookItem';
 import Spinner from '../layout/Spinner';
 
-const Books = ({ books, loading }) => {
+import BookContext from '../../context/book/bookContext';
+
+const Books = () => {
+  const bookContext = useContext(BookContext);
+
+  const { books, loading } = bookContext;
+
   if (loading) return <Spinner />;
 
   return (
