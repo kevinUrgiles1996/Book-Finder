@@ -1,0 +1,18 @@
+.result-card {
+  height: 400px;
+  margin: 5px;
+}
+
+.card {
+  box-shadow: 2px 2px 5px rgba(34, 34, 34, 0.424);
+}
+
+.img {
+  height: 150px;
+}
+
+.card-header {
+  height: 65px;
+  background-color: #2a3b47;
+  color: #fff;
+}
